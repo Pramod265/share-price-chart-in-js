@@ -3,12 +3,6 @@ $('select').on('change', function() {
 });
 
 $(document).ready(function(){
- // $("#view").click(function(){
- //       var cmp = $('#companies option:selected').val();
- //       alert(cmp);
- //    });
-
-
  	$('select').on('change', function() {
   		var cmp = this.value;
   		// alert( cmp );
@@ -21,6 +15,7 @@ $(document).ready(function(){
 		    var formData = data['Meta Data'];
 		    console.log(formData);
 			
+
 			$('#id_information').text(formData['1. Information']);
 			$('#id_symbol').text(formData['2. Symbol']);
 			$('#id_last_refreshed').text(formData['3. Last Refreshed']);
@@ -29,52 +24,67 @@ $(document).ready(function(){
 			var act_data = data['Time Series (Daily)'];
 			console.log(act_data);
 			var date = []; 
-			$.each(act_data, function(i, item) {
-				date.push(act_data[item]);
+			var open = [];
+			var high = [];
+			var low = [];
+			var close = [];
+			var volume = [];
+			$.each(act_data, function(k, v) {
+				date.push(k);
+				open.push(v['1. open']);
+				close.push(v['1. close']);
+				high.push(v['1. high']);
+				low.push(v['1. low']);
+				volume.push(v['1. volume']);
 			})
+			
+			$("#stockCanvas").empty();
 
-
-		// 	var lineChart = new Chart(stockCanvas, {
-		// 		type: 'line',
-		// 		data: stockData,
-		// 		options: chartOptions
-		// 	});
-
-		// 	var stockData = {
-		// 		labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
-		// 		datasets: [{
-		// 		  label: "Car Speed",
-		// 		  data: [0, 59, 75, 20, 20, 55, 40],
-		// 		}]
-		// 	  };
-
-		// 	  var chartOptions = {
-		// 		legend: {
-		// 		  display: true,
-		// 		  position: 'top',
-		// 		  labels: {
-		// 			boxWidth: 80,
-		// 			fontColor: 'black'
-		// 		  }
-		// 		}
-		// 	  };
 
 		new Chart(document.getElementById("stockCanvas"), {
 			type: 'line',
 			data: {
-				labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+				// labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+				labels: date,
 				datasets: [{ 
-						data: [282,350,411,502,635,809,947,1402,3700,5267],
-						label: "Asia",
+						// data: [282,350,411,502,635,809,947,1402,3700,5267],
+						data:open,
+						label: ["Open"],
 						borderColor: "#8e5ea2",
-						fill: false
+						fill: false,
 					},
+					{ 
+						data:close,
+						label: ["Close"],
+						borderColor: "#8eAAAA",
+						fill: false,
+					},
+					{ 
+						data:high,
+						label: ["high"],
+						borderColor: "green",
+						fill: false,
+					},
+					{ 
+						data:low,
+						label: ["low"],
+						borderColor: "red",
+						fill: false,
+					},
+					{ 
+						data:volume,
+						label: ["Volume"],
+						borderColor: "volume",
+						fill: false,			
+					},
+
 				]
 			},
 			options: {
 				title: {
 					display: true,
-					text: 'World population per region (in millions)'
+					zoomEnable: true,
+					text: 'Stock Price In Past Few Months in USD($)	 '
 				}
 			}
 		});
