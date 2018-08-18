@@ -1,0 +1,107 @@
+<html>
+<head>
+	<title>Share Price</title>
+</head>
+<style type="text/css">
+	/* Custom dropdown */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px; /* demo only */
+}
+
+.custom-dropdown select {
+  background-color: #1abc9c;
+  color: #fff;
+  font-size: inherit;
+  padding: .5em;
+  padding-right: 2.5em;	
+  border: 0;
+  margin: 0;
+  border-radius: 3px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -webkit-appearance: button; /* hide default arrow in chrome OSX */
+}
+
+.custom-dropdown::before,
+.custom-dropdown::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.custom-dropdown::after { /*  Custom dropdown arrow */
+  content: "\25BC";
+  height: 1em;
+  font-size: .625em;
+  line-height: 1;
+  right: 1.2em;
+  top: 50%;
+  margin-top: -.5em;
+}
+
+.details {
+
+	margin-top: 10px;
+}
+#company_details {
+    margin-left: 10px;
+    width: 160px;
+    padding-top: 1px !important;
+    padding-left: 5px;
+    color: white;
+    background-color: #1abc9c;
+
+}
+
+</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="script.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
+	<script src="http://www.chartjs.org/dist/master/Chart.min.js"></script>
+	<script src="http://www.chartjs.org/dist/master/Chart.bundle.min.js"></script>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<body>
+	<div id="div_dd" style="width: 250px;float: left;">
+		<span class="custom-dropdown big">
+		    <select id="companies">   
+		    	<option selected>Select Company</option> 
+		        <option value="MSFT">Microsoft Corp.</option>
+		        <option value="GOOGL">Google Inc.</option>  
+		        <option value="AAPL">Apple Inc.</option>
+		        <option value="FB">Facebook, Inc.</option>
+		        <option value="IBM">IBM</option>
+		    </select>
+		</span>
+		
+		<div id="company_details">
+			<span  class="details">
+				<h3>Information</h3>
+				<p id="id_information"></p>
+			</span>
+
+			<span >
+				<h3>Symbol</h3>
+				<p id="id_symbol"></p>
+			</span>
+
+			<span >
+				<h3>Last Refreshed</h3>
+				<p id="id_last_refreshed"></p>
+			</span>
+
+			<span>
+				<h3>Time Zone</h3>
+				<p id="id__time_zone"></p>
+			</span>
+
+		</div>
+	</div>
+	<div style="float: right; width: 600px; margin-right: 300px;">
+		<canvas id="stockCanvas" width="800" height="450"></canvas>
+	</div>	
+</body>
+</html>
